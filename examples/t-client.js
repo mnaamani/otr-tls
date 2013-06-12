@@ -1,15 +1,13 @@
-var fs = require("fs");
-
 var transport = require("otr-tls");
-var id = transport.id;
 
-var client = transport.createClient({
+transport.id({name:'client'},function(id){
+
+ client = transport.createClient({
      "name":"client",
-     "id": id({name:"client"})
-    ,"connect": function(streams,ipaddress,port,fingerprint){
+     "id": id,
+     "connect": function(streams,ipaddress,port,fingerprint){
         process.stdin.pipe(streams.otr_out);
         streams.otr_in.pipe(process.stdout);
     }
+  }).connect("127.0.0.1",6666);
 });
-
-client.connect("127.0.0.1",6666);

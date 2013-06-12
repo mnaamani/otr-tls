@@ -1,10 +1,10 @@
 var transport = require("otr-tls");
-var id = transport.id;
 
-var server = transport.createServer({
+transport.id({name:"server"},function(id){
+  transport.createServer({
     "name":"server",
-     "id": id({name:"server"})
-    ,"connect": function(streams,ipaddress,port,fingerprint){
+    "id": id,
+    "connect": function(streams,ipaddress,port,fingerprint){
             console.log("client connected:",fingerprint,"from:",ipaddress,port);
 
             streams.otr_in.pipe(process.stdout);
@@ -12,6 +12,5 @@ var server = transport.createServer({
 
     }
     ,"acl_fingerprints":['123abc','456def'] //not functional yet
+  }).listen(6666);
 });
-
-server.listen(6666);
