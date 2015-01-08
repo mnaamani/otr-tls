@@ -12,5 +12,10 @@
     "tls"
   ],
   "author": "Mokhtar Naamani <mokhtar.naamani@gmail.com>",
-  "license": "GPLv2"
+  "license": "GPL-2.0",
+  "dependencies":
+  {
+      "enet":"=0.1.9",
+      "otr4-em":"=0.1.3"
+  }
 }
