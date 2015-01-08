@@ -1,12 +1,15 @@
 {
 	"name": "otr-transport-enet",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "client/server OTR over enet",
 	"main": "lib/transport.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"repository": "",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:mnaamani/otr-transport-enet.git"
+	},
 	"keywords": [
 		"OTR",
 		"enet"
