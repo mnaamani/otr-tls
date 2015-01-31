@@ -1,6 +1,6 @@
 {
 	"name": "otr-transport-enet",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "client/server OTR over enet",
 	"main": "lib/transport.js",
 	"scripts": {
@@ -17,7 +17,7 @@
 	"author": "Mokhtar Naamani <mokhtar.naamani@gmail.com>",
 	"license": "GPL-2.0",
 	"dependencies": {
-		"enet": "=0.1.9",
+		"enet": "=0.2.1",
 		"otr4-em": "=0.1.3"
 	}
 }
