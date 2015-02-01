@@ -14,19 +14,19 @@ transport.account({
 		maxpeers: 32,
 		//todo need to return a peer object - to manullay disconnect when dont processing streams
 		//or should be disconnect when all streams end?
-		connect: function (streams, ipaddress, port, fingerprint) {
-			console.log("accepted connection: %s:%s (%s)", ipaddress, port, fingerprint);
-			//process.stdin.pipe(streams.otr).pipe(process.stdout);
-			//process.stdin.pipe(streams.aes).pipe(process.stdout);
-			streams.otr.pipe(process.stdout);
-			streams.aes.pipe(process.stdout);
+		onConnect: function (connection) {
+			console.log("accepted connection from: %s:%s (%s)", connection.address, connection.port,
+				connection.fingerprint);
 
-			streams.otr.on("end", function () {
-				console.log("OTR stream ended with: %s:%s", ipaddress, port);
+			connection.otr.pipe(process.stdout);
+			connection.aes.pipe(process.stdout);
+
+			connection.otr.on("end", function () {
+				console.log("OTR stream ended with: %s:%s", connection.address, connection.port);
 			});
 
-			streams.aes.on("end", function () {
-				console.log("AES stream ended with: %s:%s", ipaddress, port);
+			connection.aes.on("end", function () {
+				console.log("AES stream ended with: %s:%s", connection.address, connection.port);
 			});
 		},
 		acl_fingerprints: ['123abc', '456def'] //not functional yet

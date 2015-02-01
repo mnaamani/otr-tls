@@ -10,16 +10,29 @@ transport.account({
 	console.log("our fingerprint:", account.fingerprint());
 
 	var client = transport.createClient({
-		account: account,
-		//todo pass this function as a callback paramter in client.connect() method
-		//so we can handle timeouts...
-		//and return one object with streams,address and fingerprint
-		connect: function (streams, ipaddress, port, fingerprint) {
-			console.log("connection established: %s:%s (%s)", ipaddress, port, fingerprint);
-			process.stdin.pipe(streams.otr).pipe(process.stdout);
-			//process.stdin.pipe(streams.aes).pipe(process.stdout);
-		}
+		account: account
 	});
+
 	console.log("connecting...");
-	client.connect("127.0.0.1", 6666);
+
+	client.connect("127.0.0.1:6666", function (err, connection) {
+		if (err) {
+			console.log("connect failed:", err);
+			client.close();
+			return;
+		}
+		console.log("connection established: %s:%s (%s)", connection.address, connection.port,
+			connection.fingerprint);
+
+		process.stdin.pipe(connection.otr).pipe(process.stdout);
+
+		connection.otr.on("end", function () {
+			console.log("OTR stream ended");
+		});
+
+		connection.otr.on("error", function (e) {
+			console.log("OTR stream error:", e);
+		});
+
+	}, "" /*optional server fingerprint*/ );
 });
