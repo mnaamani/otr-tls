@@ -21,6 +21,12 @@ transport.account({
 			client.close();
 			return;
 		}
+
+		connection.onDisconnect = function () {
+			client.close();
+			console.log("closing client");
+		};
+
 		console.log("connection established: %s:%s (%s)", connection.address, connection.port,
 			connection.fingerprint);
 
@@ -28,11 +34,13 @@ transport.account({
 
 		connection.otr.on("end", function () {
 			console.log("OTR stream ended");
+			connection.disconnect();
 		});
 
 		connection.otr.on("error", function (e) {
 			console.log("OTR stream error:", e);
 		});
+
 
 	}, "" /*optional server fingerprint*/ );
 });

@@ -17,7 +17,7 @@
 	"author": "Mokhtar Naamani <mokhtar.naamani@gmail.com>",
 	"license": "GPL-2.0",
 	"dependencies": {
-		"enet": "=0.2.1",
+		"enet": "=0.2.5",
 		"otr4-em": "=0.1.3"
 	}
 }

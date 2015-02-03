@@ -28,6 +28,10 @@ transport.account({
 			connection.aes.on("end", function () {
 				console.log("AES stream ended with: %s:%s", connection.address, connection.port);
 			});
+
+			connection.onDisconnect = function () {
+				server.close();
+			};
 		},
 		acl_fingerprints: ['123abc', '456def'] //not functional yet
 	});
