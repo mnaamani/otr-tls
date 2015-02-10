@@ -1,6 +1,6 @@
 {
 	"name": "otr-transport-enet",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "client/server OTR over enet",
 	"main": "lib/transport.js",
 	"scripts": {
